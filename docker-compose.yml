@@ -1,0 +1,17 @@
+version: '3'
+services:
+    web:
+        build: ./web
+        ports: 
+            - 3000 
+
+    api:
+        image: duolabs/webauthn.io
+
+    proxy:
+        build: ./proxy
+        links:
+            - web:web
+            - api:api
+        ports:
+            - 80:80
